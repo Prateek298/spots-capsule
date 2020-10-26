@@ -1,0 +1,35 @@
+html, nav + div {
+	height: 93%;
+}
+
+body {
+	height: 100%;
+	background: -webkit-linear-gradient(to right, #e55d87, #5fc3e4);
+  	background: linear-gradient(to right, #e55d87, #5fc3e4);
+}
+
+nav {
+	background-color: #e1f5f7;
+}
+
+.row {
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+} 
+
+#profileBox {
+	background: white;
+	text-align: center;
+	border: 3px solid #4f4c42;
+    -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+    box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+#profileBox img {
+	height: 200px;
+  	width: 200px;
+  	border-radius: 50%;
+	object-fit: cover;
+}

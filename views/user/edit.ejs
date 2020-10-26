@@ -1,0 +1,28 @@
+<html>
+<head>
+	<title>Spots Capsule</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div class="wrapper">
+		<h1>Update Profile</h1>
+  		<div id="formContent">
+			
+    		<form action="/users/<%= user._id %>?_method=PUT" method="POST">
+      			<input type="text" name="user[username]" placeholder="Username" value="<%= user.username %>" required>
+				<input type="email" name="user[email]" placeholder="Email" value="<%= user.email %>" required>
+				<input type="text" name="user[profilePic]" placeholder="Avatar URL(optional)" value="<%= user.profilePic %>">
+				<input type="number" name="user[age]" placeholder="Your age(optional)" value="<%= user.age %>">
+				<textarea name="user[about]" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc"><%= user.about %></textarea>
+      			<input type="submit" value="Update">
+    		</form>
+
+    		<div id="formFooter">
+      			<a href="/forgot">Change Password</a>
+    		</div>
+
+  		</div>
+	</div>
+</body>
+</html>

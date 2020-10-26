@@ -1,0 +1,38 @@
+<%- include("../partials/header") %>
+
+<div class="container">
+	<div class="row">
+    	<main class="col-md-5 col-10 my-5 mx-auto">
+    		<h1 style="text-align: start">New Sight</h1>
+        	<form action="/sights" method="POST">
+            	<div class="form-group">
+                	<input class="form-control" type="text" name="sight[placeName]" placeholder="Name of the Place" required>
+            	</div>
+            	<div class="form-group">
+                	<input class="form-control" type="text" name="sight[showPic]" placeholder="Display Image url" required>
+            	</div>
+				<div class="form-group">
+                	<input class="form-control" type="text" name="sight[location]" placeholder="Address" required>
+            	</div>
+				<div class="form-group">
+                	<input class="form-control" type="text" name="sight[wiki]" placeholder="Paste related wikipedia url" required>
+            	</div>
+				<div class="form-group">
+                	<input class="form-control" type="text" name="sight[creator]" placeholder="Built By" required>
+            	</div>
+				<div class="form-group">
+                	<input class="form-control" type="text" name="sight[builtIn]" placeholder="Year of Creation" required>
+            	</div>
+				<div class="form-group">
+                	<textarea name="sight[desc]" placeholder="Description of Place"></textarea>
+            	</div>
+            	<div class="form-group">
+                	<button class="btn btn-lg btn-primary btn-block">Create</button>
+            	</div>
+        	</form>
+        	<a href="/sights">Go Back</a>
+    	</main>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

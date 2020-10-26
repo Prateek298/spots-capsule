@@ -1,0 +1,88 @@
+<%- include("../partials/header") %>
+
+<div class="container mb-3">
+	
+	<header class="jumbotron">
+		<h1>Divine India</h1>
+		<!-- <p>Bask in the Glory...</p> -->
+		<% if(currentUser && currentUser.isAdmin) { %>
+			<a href="/sights/new" class="btn btn-primary">Add New Sight</a>
+		<% } %>
+	</header>
+	
+	<div class="row">
+			
+		<% sights.forEach((sight) => { %>
+		
+			<main class="col-12 col-md-4">
+				<div class="card mb-2">
+         			<img src="<%= sight.showPic %>" class="card-img-top" style="max-height: 17em" alt="...">
+         			<div class="card-body">
+						<h4 class="card-title">
+							<a href="/sights/<%= sight._id %>"><strong><%= sight.placeName %></strong></a>
+						</h4>
+						<p class="card-text">Location: <%= sight.location %></p>
+						<p class="card-text">Built By: <%= sight.creator %></p>
+						<p class="card-text">Built In: <%= sight.builtIn %></p>
+						<p class="card-text">
+							<em><%= sight.desc.substring(0,100) %>...</em>
+							<a href="/sights/<%= sight._id %>">Learn more...</a>
+						</p>	
+           		 	</div>
+        		</div>
+			</main>
+		
+    	<% }); %>
+		
+	</div>
+		
+		<div class="row justify-content-center mt-4">
+			
+    		<% if (pages && pages > 0) { %>
+    			<ul class="pagination">
+        			<%  if (current == 1) { %>
+        			<li class="border border-dark p-2 disabled"><a>First</a></li>
+       				<% } else { %>
+        			<li class="border border-dark p-2"><a href="/sights<% if(search){ %>?search=<%= search %><% } %>">First</a></li>
+        			<% } %>
+ 
+        			<% if (current == 1) { %>
+        			<li class="border border-dark p-2 disabled"><a>«</a></li>
+       				<% } else { %>
+       				<li class="border border-dark p-2"><a href="/sights?page=<%= Number(current) - 1 %><%if(search){%>&search=<%=search%><%}%>">«</a></li>
+        			<% } %>
+ 
+        			<% let i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+        			<% if (i !== 1) { %>
+        			<li class="disabled"><a>...</a></li>
+        			<% } %>
+        			<% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+        			<% if (i == current) { %>
+        			<li class="border border-dark p-2 active"><a><%= i %></a></li>
+        			<% } else { %>
+        			<li class="border border-dark p-2"><a href="/sights?page=<%= i %><%if(search){%>&search=<%=search%><%}%>"><%= i %></a></li>
+        			<% } %>
+        			<% if (i == Number(current) + 4 && i < pages) { %>
+        			<li class="disabled"><a>...</a></li>
+       				<% } %>
+        			<% } %> <!-- for -->
+ 
+        			<% if (current == pages) { %>
+        			<li class="border border-dark p-2 disabled"><a>»</a></li>
+        			<% } else { %>
+        			<li class="border border-dark p-2"><a href="/sights?page=<%= Number(current) + 1 %><%if(search){%>&search=<%=search%><%}%>">»</a></li>
+        			<% } %>
+ 
+        			<% if (current == pages) { %>
+        			<li class="border border-dark p-2 disabled"><a>Last</a></li>
+        			<% } else { %>
+        			<li class="border border-dark p-2"><a href="/sights?page=<%= pages %><% if(search){ %>&search=<%= search %><% } %>">Last</a></li>
+        			<% } %>
+    			</ul>
+    		<% } %>
+			
+		</div>
+	
+</div>
+
+<%- include("../partials/footer") %>

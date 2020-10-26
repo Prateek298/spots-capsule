@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Spots Capsule</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-light mb-3">
+			<div class="container">
+				<a class="navbar-brand" href="/">
+					<img src="/logo.png" width="150" height="45">
+				</a>
+  				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    				<span class="navbar-toggler-icon"></span>
+  				</button>
+
+  				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+    				<ul class="navbar-nav mr-auto">
+      					<li class="nav-item">
+        					<a class="nav-link" href="/sights">Home</a>
+      					</li>
+      					<li class="nav-item">
+        					<a class="nav-link" href="#">About</a>
+      					</li>
+						<% if(currentUser && (currentUser.isAdmin || currentUser.isPermAdmin)) { %>
+							<li class="nav-item">
+        						<a class="nav-link" href="/users">Users</a>
+      						</li>
+						<% } %>
+   					 </ul>
+    				<ul class="navbar-nav ml-auto">
+						 <% if(!currentUser){ %>
+						 	<li class="nav-item">
+                         		<a class="nav-link" href="/login">Login</a>
+                         	</li>
+		                 	<li class="nav-item">
+                         		<a class="nav-link" href="/users/new">Sign-up</a>
+                         	</li>
+						 <% } else { %>
+						 	<li class="nav-item">
+                         		<a class="nav-link" href="/users/<%= currentUser._id %>"><%= currentUser.username %></a>
+                         	</li>
+		                 	<li class="nav-item">
+                         		<a class="nav-link" href="/logout">Logout</a>
+                         	</li>
+						<% } %>
+					</ul>
+				</div>
+  			</div>
+		</nav>
+
+<!-- Profile section -->
+<div>
+	<div class="row">
+		<main id="profileBox" class="col-9 col-sm-8 col-md-5 col-lg-3 py-3">
+			<img src="<%= user.profilePic %>" alt="...">
+			<h2><%= user.username %></h2>
+			<p><%= user.email %></p>
+			<% if(user._id.equals(currentUser._id)) { %>
+				<div>
+					<a href="/users/<%= user._id %>/edit"><button type="button" class="btn btn-warning btn-sm mr-1">Edit</button></a>
+				</div>
+			<% } %>
+			<% if(user.age) { %>
+				<div>
+					<p>Age: <%= user.age %></p>
+				</div>
+			<% } %>
+			<div>
+				<p><%= user.about %></p>
+			</div>
+			<% if(user._id.equals(currentUser._id)) { %>
+				<div>
+					<form action="/users/<%= user._id %>?_method=DELETE" method="POST">
+						<button class="btn btn-sm btn-outline-danger">Remove your account</button>
+					</form>
+				</div>
+			<% } %>
+		</main>
+	</div>
+</div>
+
+<%- include("../partials/footer") %>

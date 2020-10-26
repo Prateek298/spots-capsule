@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>Spots Capsule</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/login.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	
+	<div class="wrapper">
+		<h1>Register</h1>
+  		<div id="formContent">
+			
+    		<form action="/users" method="POST">
+      			<input type="text" name="username" placeholder="Username" required>
+				<input type="email" name="email" placeholder="Email" required>
+				<input type="password" name="password" placeholder="Create password" pattern=".{6,12}" title="Password must be 6 to 12 characters" required>
+				<input type="text" name="pic" placeholder="Avatar URL(optional)">
+      			<input type="number" name="age" placeholder="Your age(optional)">
+				<textarea name="about" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc"></textarea>
+      			<input type="submit" value="Sign Up">
+    		</form>
+
+    		<div id="formFooter">
+      			<a href="/login">Already a member? Login</a>
+    		</div>
+
+  		</div>
+	</div>
+</body>
+</html>
