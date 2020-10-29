@@ -8,16 +8,14 @@
             <div class="card" style="font-family: 'Noto Sans JP', sans-serif;">
                 <div class="card-body">
                     <% if (sight.rating === 0) { %>
-                    <h5>
-                        <em>No reviews yet.</em>
-                    </h5>
+                    	<h5><em>No reviews yet.</em></h5>
                     <% } else { %>
                     <p>
-                        <span class="fa fa-star checked"></span>
-                        <span class="fa fa-star <% if (sight.rating > 1.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (sight.rating > 2.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (sight.rating > 3.5) { %> checked <% } %>"></span>
-                        <span class="fa fa-star <% if (sight.rating > 4.5) { %> checked <% } %>"></span>
+                        <span class="fa fa-star d-inline-block"></span>
+                        <span class="fa fa-star <% if (sight.rating > 1.5) { %> d-inline-block <% } else { %> d-none <% } %>"></span>
+                        <span class="fa fa-star <% if (sight.rating > 2.5) { %> d-inline-block <% } else { %> d-none <% } %>"></span>
+                        <span class="fa fa-star <% if (sight.rating > 3.5) { %> d-inline-block <% } else { %> d-none <% } %>"></span>
+                        <span class="fa fa-star <% if (sight.rating > 4.5) { %> d-inline-block <% } else { %> d-none <% } %>"></span>
                         <em>(total reviews: <%= sight.reviews.length %>)</em>
                     </p>
                     <p>
@@ -28,22 +26,24 @@
                     <% sight.reviews.forEach((review) => { %>
                     <div class="row">
                         <div class="col-md-3">
-                            <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %><%- '<span class="fa fa-star"></span>'.repeat(5 - review.rating) %>
+                            <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
                             <div>Review by: <strong><%= review.user.username %></strong></div>
                             <span><em><%= moment(review.updatedAt).fromNow() %></em></span> 
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-7">
                             <p style="text-align: justify; word-wrap: break-word;">
                                 <%= review.text %>
                             </p>
-                            <% if(currentUser && review.user.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-xs btn-warning"
+                        </div>
+						<div class="col-md-2">
+							<% if(currentUser && review.user.id.equals(currentUser._id)){ %>
+                            <a class="btn btn-sm btn-warning mb-2"
                                href="/sights/<%=sight._id %>/reviews/<%=review._id %>/edit">Edit</a>
                             <form id="delete-form" action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="btn btn-xs btn-danger" value="Delete">
+                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
                             </form>
                             <% } %>
-                        </div>
+						</div>
                     </div>
                     <hr>
                     <% }); %>

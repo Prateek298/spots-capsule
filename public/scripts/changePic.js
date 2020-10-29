@@ -1,7 +1,9 @@
-const caraImg = document.getElementById('caraImg');
+const caraImg = document.querySelectorAll(".carousel-item img");
 const showPic = document.querySelector("#showCard > img");
 
-caraImg.addEventListener('click', function() {
-	const reqPicSrc = this.getAttribute('src');
-	showPic.setAttribute('src', reqPicSrc);
-});
+for(let i = 0; i < caraImg.length; i++) {
+	caraImg[i].addEventListener('click', function() {
+		let reqPicSrc = this.getAttribute('src');
+		showPic.setAttribute('src', reqPicSrc);
+	});
+}

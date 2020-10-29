@@ -89,7 +89,6 @@ router.put("/:rev_id", middleware.checkLogin, middleware.checkReviewOwnership, (
             sight.save();
 			
             req.flash("success", "Your review was successfully edited.");
-			console.log(err);
             res.redirect('/sights/' + req.params.id);
         });
     });
@@ -125,9 +124,7 @@ function calculateAverage(reviews) {
         return 0;
     }
     let sum = 0;
-    reviews.forEach((element) => {
-        sum += element.rating;
-    });
+    reviews.forEach((element) => { sum += element.rating });
     return sum / reviews.length;
 }
 

@@ -1,35 +1,10 @@
 const express    = require('express'),
 	  router     = express.Router(),
-	  passport   = require('passport'),
-	  multer     = require('multer'),
-	  cloudinary = require('cloudinary');
+	  passport   = require('passport');
 
 const User = require("../models/user"),
 	  middleware = require("../middleware");
 
-//multer config for image upload
-let storage = multer.diskStorage({
-	filename: function(req, file, cb) {           //cb - callback
-		cb(null, Date.now() + file.orginalname);  //changing file names to be unique
-	}
-});
-
-const imageFilter = function(req, file, cb) {
-	// accept image files only
-    if (!file.originalname.match(/\.(jpg|jpeg|png|gif)$/i)) {
-        return cb(new Error('Only image files are allowed!'), false);
-	}
-	cb(null, true);
-}
-
-const upload = multer({ storage: storage, fileFilter: imageFilter});
-
-//Cloudinary config
-cloudinary.config({
-	cloud_name: "prat",
-	api_key: process.env.CLOUDINARY_API_KEY,
-	api_secret: process.env.CLOUDINARY_API_SECRET
-});
 
 //NEW
 router.get("/new", (req, res) => {
@@ -45,16 +20,21 @@ router.post("/", (req, res) => {
 		age: req.body.age,
 		about: req.body.about
 	});
-	User.register(newUser, req.body.password, (err, user) => {
-		if(err) {
-			req.flash('error', err.message);
-			return res.redirect('back');
-		}
-		passport.authenticate('local')(req, res, () => {
-			req.flash('success', "Welcome " + req.user.username);
-			res.redirect("/sights");
+	if(ValidateEmail(newUser.email)) {
+		User.register(newUser, req.body.password, (err, user) => {
+			if(err) {
+				req.flash('error', err.message);
+				return res.redirect('back');
+			}
+			passport.authenticate('local')(req, res, () => {
+				req.flash('success', `Welcome,${req.user.username}`);
+				res.redirect("/sights");
+			});
 		});
-	});
+	}
+	else {
+		res.redirect('back');
+	}
 });
 
 //SHOW
@@ -138,5 +118,17 @@ router.get("/", middleware.checkLogin, middleware.checkAdmin, (req, res) => {
 		res.render("user/index", {users});
 	});
 });
+
+//Validating email syntax 
+function ValidateEmail(email)
+{
+	const mailformat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+	if(mailformat.test(email))
+	{
+		return true;
+	}
+	return false;
+}
+
 
 module.exports = router;
