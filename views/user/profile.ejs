@@ -3,6 +3,7 @@
 	<head>
 		<title>Spots Capsule</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+		<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/profile.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
@@ -40,7 +41,10 @@
                          	</li>
 						 <% } else { %>
 						 	<li class="nav-item">
-                         		<a class="nav-link" href="/users/<%= currentUser._id %>"><%= currentUser.username %></a>
+                         		<a class="nav-link" href="#">
+									<img id="userPic" src="<%= currentUser.profilePic %>">
+									<span class="d-md-none d-lg-block float-none float-lg-right"> <%= currentUser.username %></span>
+								</a>
                          	</li>
 		                 	<li class="nav-item">
                          		<a class="nav-link" href="/logout">Logout</a>
@@ -52,7 +56,6 @@
 		</nav>
 
 <!-- Profile section -->
-<!-- <div> -->
 	<div class="row">
 		<main id="profileBox" class="col-9 col-sm-8 col-md-5 col-lg-3 py-3">
 			<img src="<%= user.profilePic %>" alt="...">
@@ -80,6 +83,5 @@
 			<% } %>
 		</main>
 	</div>
-<!-- </div> -->
 
 <%- include("../partials/footer") %>

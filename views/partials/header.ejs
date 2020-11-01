@@ -5,7 +5,7 @@
 		<script src="https://kit.fontawesome.com/653ef1bf98.js" crossorigin="anonymous"></script>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 		<!-- Custom Styles -->
-		<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat&family=Noto+Sans+JP:wght@500&family=Libre+Baskerville:wght@700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&family=Montserrat&family=Noto+Sans+JP:wght@500&family=Libre+Baskerville:wght@700&family=Itim&display=swap" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="/stylesheets/common.css">
 		<!-- mapbox -->
 		<script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
@@ -54,7 +54,7 @@
 						 	<li class="nav-item">
                          		<a class="nav-link" href="/users/<%= currentUser._id %>">
 									<img id="userPic" src="<%= currentUser.profilePic %>">
-									<%= currentUser.username %>
+									<span class="d-md-none d-lg-block float-none float-lg-right"> <%= currentUser.username %></span>
 								</a>
                          	</li>
 		                 	<li class="nav-item">

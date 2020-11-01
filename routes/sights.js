@@ -12,6 +12,8 @@ const Sight = require("../models/sight"),
 	  Review = require("../models/review"),
 	  middleware = require("../middleware");
 
+let sortCategory = {sort: { createdAt: -1 }};
+
 //INDEX
 router.get("/", async (req, res) => {
 	const perPage = 6;
@@ -76,11 +78,12 @@ router.post("/", middleware.checkLogin, middleware.checkAdmin, async (req, res) 
 	});
 });
 
-//SHOW
+// SHOW
 router.get("/:id", (req, res) => {
+	let sortCategory = (req.query.sortBy == 'ratings')? {rating: -1} : {createdAt: -1};
 	Sight.findById(req.params.id).populate({
 		path: 'reviews',
-		options: {sort: {createdAt: -1}}
+		options: {sort: sortCategory}   
 	}).exec((err, foundSight) => {
 		if(err) {
 			req.flash('error', "Sight couldn't be found");
@@ -128,11 +131,9 @@ router.patch("/:id", middleware.checkLogin, upload.array('image'), (req, res) =>
 				nextGallery.push({url: file.path, filename: file.filename});
 			})
 			sight.gallery = nextGallery;
-			//save image to sight
-			await sight.save();
-				
+			await sight.save();	
 			req.flash('success', "Image added");
-		}
+		}	
 		else {
 			req.flash('error', "Files missing");
 		}

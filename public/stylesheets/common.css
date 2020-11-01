@@ -6,7 +6,8 @@ body{
 
 nav {
 	background-color: #e1f5f7;
-	font-family: 'Josefin Sans', sans-serif;
+	font-family: 'Itim', cursive;
+	font-weight: 700;
 }
 
 #search:placeholder {

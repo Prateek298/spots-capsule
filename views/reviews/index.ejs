@@ -21,6 +21,16 @@
                     <p>
                         Current sight rating: <strong><%= sight.rating.toFixed(2) %></strong>
                     </p>
+					<span style="float: right">
+						<form action="/sights/<%= sight._id %>/reviews" method="GET">
+							<label for="sortBy">Sort By:</label>
+							<select name="sortBy" id="sortBy" onchange='if(this.value != 0) { this.form.submit() }'>
+								<option value="0">Sort</option>
+								<option value="ratings">Ratings</option>
+								<option value="createdAt">Date</option>
+							</select>
+						</form>
+					</span>
                     <h4>All reviews for this sight:</h4>
                     <hr style="margin-top: 0;">
                     <% sight.reviews.forEach((review) => { %>

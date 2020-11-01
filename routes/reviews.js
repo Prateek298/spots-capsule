@@ -6,10 +6,11 @@ const Review = require("../models/review"),
 	  middleware = require("../middleware");
 
 //INDEX
-router.get("/", (req, res) => {
+router.get("/", (req, res) => { 
+	let sortCategory = (req.query.sortBy == 'ratings')? {rating: -1} : {createdAt: -1};
 	Sight.findById(req.params.id).populate({
 		path: 'reviews',
-		options: {sort: {createdAt: -1}} 
+		options: {sort: sortCategory} 
 	}).exec( (err, sight) => {
 		if(err || !sight) {
 			req.flash('error', "Sight couldn't be found");
