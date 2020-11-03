@@ -10,14 +10,18 @@
 		<h1>Register</h1>
   		<div id="formContent">
 			
-    		<form action="/users" method="POST">
+    		<form action="/users" method="POST" enctype="multipart/form-data">
       			<input type="text" name="username" placeholder="Username" required>
 				<input type="email" name="email" placeholder="Email" required>
 				<input type="password" name="password" placeholder="Create password" pattern=".{6,12}" title="Password must be 6 to 12 characters" required>
-				<input type="text" name="pic" placeholder="Avatar URL(optional)">
       			<input type="number" name="age" placeholder="Your age(optional)">
-				<textarea name="about" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc"></textarea>
-      			<input type="submit" value="Sign Up">
+				<textarea name="about" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc" style="margin-bottom: 1rem"></textarea>
+				<div class="button-wrap">
+  					<label class ="new-button"> Upload Profile Image
+  						<input type="file" name="image" accept="image/*">
+					</label>	
+				</div>
+      			<input type="submit" value="Sign Up" style="margin-top: 1rem">
     		</form>
 
     		<div id="formFooter">

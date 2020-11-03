@@ -5,13 +5,14 @@ body{
 }
 
 nav {
-	background-color: #e1f5f7;
+	/* background-color: #e1f5f7; */
+	background-color: #000;
 	font-family: 'Itim', cursive;
 	font-weight: 700;
 }
 
-#search:placeholder {
-	font-family: 'Arial';
+.nav-link {
+	color: #d7d7d9;
 }
 
 #userPic {
@@ -125,4 +126,23 @@ textarea {
 		margin-bottom: 50%;
 	}
 	
+}
+
+/* About page */
+
+#feat {
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.feature {
+	margin-top: 5px;
+}
+
+.feature h2 {
+	font-family: Montserrat, sans-serif;
+}
+
+.feature ul {
+	font-family: Itim, cursive;
+	font-size: 1.1rem;
 }

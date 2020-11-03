@@ -5,10 +5,13 @@ body {
 }
 
 nav {
-	background-color: #e1f5f7;
-	margin-bottom: 3rem;
+	background-color: #000;
 	font-family: 'Itim', cursive;
 	font-weight: 700;
+}
+
+.nav-link {
+	color: #d7d7d9;
 }
 
 #userPic {

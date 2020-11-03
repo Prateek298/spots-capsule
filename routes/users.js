@@ -1,10 +1,13 @@
-const express    = require('express'),
-	  router     = express.Router(),
-	  passport   = require('passport');
+const express        = require('express'),
+	  router         = express.Router(),
+	  passport       = require('passport'),
+	  multer         = require('multer'),
+	  { storage }    = require('../configs/cloudinary'),
+	  upload         = multer({ storage }),
+	  { cloudinary } = require('../configs/cloudinary');
 
 const User = require("../models/user"),
 	  middleware = require("../middleware");
-
 
 //NEW
 router.get("/new", (req, res) => {
@@ -12,19 +15,23 @@ router.get("/new", (req, res) => {
 });
 
 //CREATE
-router.post("/", (req, res) => {
+router.post("/", upload.single('image'), (req, res) => {
 	const newUser = new User({
 		username: req.body.username,
 		email: req.body.email,
-		profilePic: req.body.pic,
 		age: req.body.age,
 		about: req.body.about
 	});
 	if(ValidateEmail(newUser.email)) {
-		User.register(newUser, req.body.password, (err, user) => {
+		User.register(newUser, req.body.password, async (err, user) => {
 			if(err) {
 				req.flash('error', err.message);
 				return res.redirect('back');
+			}
+			if(req.file) {
+				user.profilePic.url = req.file.path; 
+				user.profilePic.filename = req.file.filename;
+				await user.save();
 			}
 			passport.authenticate('local')(req, res, () => {
 				req.flash('success', `Welcome,${req.user.username}`);
@@ -60,18 +67,26 @@ router.get("/:id/edit", middleware.checkUser, (req, res) => {
 });
 
 //UPDATE
-router.put("/:id", middleware.checkUser, (req, res) => {
-	User.findByIdAndUpdate(req.params.id, req.body.user, (err, foundUser) => {
+router.put("/:id", middleware.checkUser, upload.single('image'), (req, res) => {
+	User.findByIdAndUpdate(req.params.id, req.body.user, async (err, user) => {
 		if(err) {
 			req.flash('error', "User not found");
 			return res.redirect("/users/" + req.params.id);
+		}
+		if(req.file) {
+			if(user.profilePic) {
+				cloudinary.uploader.destroy(user.profilePic.filename);
+			}
+			user.profilePic.url = req.file.path; 
+			user.profilePic.filename = req.file.filename;
+			await user.save();
 		}
 		req.flash('success', "Profile updated");
 		res.redirect("/users/" + req.params.id);
 	});
 });
 
-//PATCH
+//PATCH - for altering admin roles
 router.patch("/:id", middleware.checkLogin, middleware.checkAdmin, (req, res) => {
 	User.findById(req.params.id, (err, user) => {
 		if(err) {
@@ -98,11 +113,15 @@ router.patch("/:id", middleware.checkLogin, middleware.checkAdmin, (req, res) =>
 
 //DESTROY
 router.delete("/:id", middleware.checkUser, (req, res) => {
-	User.findByIdAndRemove(req.params.id, (err) => {
+	User.findById(req.params.id, async (err, user) => {
 		if(err) {
 			req.flash('error', "User not found");
 			return res.redirect("/users/" + req.params.id);
 		}
+		if(user.profilePic) {
+			cloudinary.uploader.destroy(user.profilePic.filename);
+		}
+		await user.deleteOne();
 		req.flash('success', "We bid you farewell");
 		res.redirect("/sights");
 	});
@@ -129,6 +148,5 @@ function ValidateEmail(email)
 	}
 	return false;
 }
-
 
 module.exports = router;

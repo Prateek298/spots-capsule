@@ -9,13 +9,18 @@
 		<h1>Update Profile</h1>
   		<div id="formContent">
 			
-    		<form action="/users/<%= user._id %>?_method=PUT" method="POST">
+    		<form action="/users/<%= user._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
       			<input type="text" name="user[username]" placeholder="Username" value="<%= user.username %>" required>
 				<input type="email" name="user[email]" placeholder="Email" value="<%= user.email %>" required>
-				<input type="text" name="user[profilePic]" placeholder="Avatar URL(optional)" value="<%= user.profilePic %>">
+				<!-- <input type="text" name="user[profilePic]" placeholder="Avatar URL(optional)" value="<%= //user.profilePic %>"> -->
 				<input type="number" name="user[age]" placeholder="Your age(optional)" value="<%= user.age %>">
-				<textarea name="user[about]" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc"><%= user.about %></textarea>
-      			<input type="submit" value="Update">
+				<textarea name="user[about]" placeholder="Something about yourself like preferred type of places to visit, your passion about travelling,etc" style="margin-bottom: 1rem"><%= user.about %></textarea>
+				<div class="button-wrap">
+  					<label class ="new-button"> Change Profile Image
+  						<input type="file" name="image" accept="image/*">
+					</label>	
+				</div>
+      			<input type="submit" value="Update" style="margin-top: 1rem">
     		</form>
 
     		<div id="formFooter">

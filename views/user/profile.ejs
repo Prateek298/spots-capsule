@@ -8,7 +8,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<nav class="navbar navbar-expand-md navbar-light">
+		<nav class="navbar navbar-expand-md navbar-inverse">
 			<div class="container">
 				<a class="navbar-brand" href="/">
 					<img src="/logo.png" width="150" height="45">
@@ -42,7 +42,7 @@
 						 <% } else { %>
 						 	<li class="nav-item">
                          		<a class="nav-link" href="#">
-									<img id="userPic" src="<%= currentUser.profilePic %>">
+									<img id="userPic" src="<%= currentUser.profilePic.url %>">
 									<span class="d-md-none d-lg-block float-none float-lg-right"> <%= currentUser.username %></span>
 								</a>
                          	</li>
@@ -58,7 +58,7 @@
 <!-- Profile section -->
 	<div class="row">
 		<main id="profileBox" class="col-9 col-sm-8 col-md-5 col-lg-3 py-3">
-			<img src="<%= user.profilePic %>" alt="...">
+			<img src="<%= user.profilePic.url %>" alt="...">
 			<h2><%= user.username %></h2>
 			<p><%= user.email %></p>
 			<% if(user._id.equals(currentUser._id)) { %>

@@ -12,6 +12,11 @@ router.get("/", (req, res) => {
 	res.render("landing");
 });
 
+//About
+router.get("/about", (req, res) => {
+	res.render('about');
+});
+
 //====================Forgot Password================================
 router.get("/forgot", (req, res) => {
 	res.render("user/forgotPass");

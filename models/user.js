@@ -11,15 +11,11 @@ const userSchema = new mongoose.Schema({
 	//optional
 	age: Number,
 	profilePic: {
-		type: String,
-		default: defaultPic
+		url: String,
+    	filename: String
 	},
 	profilePicId: String,
 	about: String,
-	savedSights: [{
-		type: mongoose.Schema.Types.ObjectId,
-		ref: "Sight"
-	}],
 	isAdmin: {type: Boolean, default: false},
 	isPermAdmin: {type: Boolean, default: false},
 	//password reset

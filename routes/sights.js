@@ -12,8 +12,6 @@ const Sight = require("../models/sight"),
 	  Review = require("../models/review"),
 	  middleware = require("../middleware");
 
-let sortCategory = {sort: { createdAt: -1 }};
-
 //INDEX
 router.get("/", async (req, res) => {
 	const perPage = 6;

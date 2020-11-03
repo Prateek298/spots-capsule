@@ -1,10 +1,5 @@
 html {
   background-color: #56baed;
-	/* background-image: url(https://images.pexels.com/photos/574324/pexels-photo-574324.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260);
-	background-size: auto auto;
-	background-repeat: no-repeat;
-	background-position: 30% 70%; */
-	
 }
 
 body {
@@ -72,6 +67,30 @@ input[type=button], input[type=submit]  {
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
   background-color: #39ace7;
+}
+
+.new-button {
+	display: inline-block;
+    padding: 8px 12px; 
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: #ebebeb;
+    font-size: 16px;
+    color: #000;
+	text-align: start;
+}
+
+input[type=file] {
+	position: absolute;
+	z-index: -1;
+	top: 6px;
+	left: 0;
+	font-size: 15px;
+	color: rgb(153,153,153);
+}
+
+.button-wrap {
+	position: relative;
 }
 
 input[type=submit] {
