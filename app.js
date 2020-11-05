@@ -1,10 +1,12 @@
-const express      = require('express'),
-	  app          = express(),
-	  bodyParser   = require('body-parser'),
-	  passport     = require('passport'),
-	  flash        = require('connect-flash'),
-	  session      = require('express-session'),
-	  mongoDBStore = require('connect-mongo')(session);
+const express       = require('express'),
+	  app           = express(),
+	  bodyParser    = require('body-parser'),
+	  passport      = require('passport'),
+	  flash         = require('connect-flash'),
+	  mongoSanitize = require('express-mongo-sanitize'),
+	  session       = require('express-session'),
+	  mongoDBStore  = require('connect-mongo')(session),
+	  helmet        = require('helmet');
 
 const connectDB = require('./configs/db');
 const User = require("./models/user");
@@ -20,6 +22,8 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('method-override')("_method"));
 app.use(flash());
+app.use(helmet({ contentSecurityPolicy: false }));
+app.use(mongoSanitize());
 
 app.locals.moment = require('moment');
 

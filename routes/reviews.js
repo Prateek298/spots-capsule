@@ -114,7 +114,6 @@ router.delete("/:rev_id", middleware.checkLogin, middleware.checkReviewOwnership
             sight.save();
 			
             req.flash("success", "Your review was deleted successfully.");
-			console.log(err);
             res.redirect("/sights/" + req.params.id);
         });
     });

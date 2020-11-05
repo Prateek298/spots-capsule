@@ -33,8 +33,12 @@ router.post("/", upload.single('image'), (req, res) => {
 				user.profilePic.filename = req.file.filename;
 				await user.save();
 			}
+			else {
+				user.profilePic.url = "https://res.cloudinary.com/prat/image/upload/v1604423713/Sights/default_user_yg2epc.jpg";
+				await user.save();
+			}
 			passport.authenticate('local')(req, res, () => {
-				req.flash('success', `Welcome,${req.user.username}`);
+				req.flash('success', `Welcome, ${req.user.username} in the Capsule`);
 				res.redirect("/sights");
 			});
 		});
@@ -118,7 +122,7 @@ router.delete("/:id", middleware.checkUser, (req, res) => {
 			req.flash('error', "User not found");
 			return res.redirect("/users/" + req.params.id);
 		}
-		if(user.profilePic) {
+		if(user.profilePic && user.profilePic.filename) {
 			cloudinary.uploader.destroy(user.profilePic.filename);
 		}
 		await user.deleteOne();

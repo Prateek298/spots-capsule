@@ -41,7 +41,7 @@ middleware.checkReviewOwnership = function(req, res, next) {
 			console.log(err);
             return res.redirect('back');
         }
-        if(review.user.id.equals(req.user._id)) {
+        if((review.user.id.equals(req.user._id)) || req.user.isPermAdmin) {
             return next();
         } 
         req.flash("error", "You don't have permission to do that");

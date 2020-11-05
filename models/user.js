@@ -1,8 +1,6 @@
 const mongoose              = require('mongoose'),
 	  passportLocalMongoose = require('passport-local-mongoose');
 
-const defaultPic = "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-social-media-user-vector-default-avatar-profile-icon-social-media-user-vector-portrait-176194876.jpg";
-
 const userSchema = new mongoose.Schema({
 	//compulsory
 	username: {type: String, unique: true, required: true},

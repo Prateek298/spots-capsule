@@ -47,11 +47,13 @@
                         </div>
 						<div class="col-md-2">
 							<% if(currentUser && review.user.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-sm btn-warning mb-2"
-                               href="/sights/<%=sight._id %>/reviews/<%=review._id %>/edit">Edit</a>
-                            <form id="delete-form" action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
-                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
-                            </form>
+                            	<a class="btn btn-sm btn-warning mb-2"
+                               		href="/sights/<%=sight._id %>/reviews/<%=review._id %>/edit">Edit</a>
+							<% } %>
+							<% if(currentUser && (review.user.id.equals(currentUser._id) || currentUser.isPermAdmin )){ %>
+                            	<form id="delete-form" action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
+                                	<input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                            	</form>
                             <% } %>
 						</div>
                     </div>

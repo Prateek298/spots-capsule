@@ -104,10 +104,12 @@
 						</div>
 						<div class="col-md-3 col-4">
                             <% if(currentUser && review.user.id.equals(currentUser._id)){ %>
-                            <a class="btn btn-sm btn-warning" href="/sights/<%= sight._id %>/reviews/<%= review._id %>/edit">Edit</a>
-                            <form action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST" style="display: inline">
-                                <input type="submit" class="btn btn-sm btn-danger" value="Delete">
-                            </form>
+                            	<a class="btn btn-sm btn-warning" href="/sights/<%= sight._id %>/reviews/<%= review._id %>/edit">Edit</a>
+							<% } %>
+							<% if(currentUser && (review.user.id.equals(currentUser._id) || currentUser.isPermAdmin )){ %>
+                            	<form action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST" style="display: inline">
+                                	<input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                            	</form>
                             <% } %>
                         </div>
                     </div>
