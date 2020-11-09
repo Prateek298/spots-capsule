@@ -1,6 +1,6 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var reviewSchema = new mongoose.Schema({
+const reviewSchema = new mongoose.Schema({
     rating: {
         // Setting the field type
         type: Number,

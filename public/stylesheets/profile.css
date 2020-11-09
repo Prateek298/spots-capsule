@@ -1,7 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Goldman:wght@700&family=Roboto+Condensed&display=swap');
+
 body {
 	height: 100%;
 	background: -webkit-linear-gradient(to right, #e55d87, #5fc3e4);
   	background: linear-gradient(to right, #e55d87, #5fc3e4);
+	margin-top: 100px;
 }
 
 nav {
@@ -30,10 +33,15 @@ nav {
 
 #profileBox {
 	background: white;
+	font-family: 'Roboto Condensed', sans-serif;
 	text-align: center;
 	border: 3px solid #4f4c42;
     -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
     box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+}
+
+#profileBox h2 {
+	font-family: 'Goldman', cursive;
 }
 
 #profileBox img {
@@ -43,18 +51,22 @@ nav {
 	object-fit: cover;
 }
 
-footer {
+.footer1 {
 	margin-top: 3.6rem;
+}
+
+.footer2 {
+	margin-top: 4.7rem;
+}
+
+.footer3 {
+	margin-top: 7.4rem;
 }
 
 @media (orientation: landscape) {
 	
 	nav {
 		margin-bottom: 1.5rem
-	}
-	
-	footer {
-		margin-top: 1.5rem;
 	}
 	
 }

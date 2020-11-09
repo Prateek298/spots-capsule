@@ -25,6 +25,10 @@ router.get("/", async (req, res) => {
 		if(obj.sightCount === 0) {
 			obj = await searchBy({location: regex}, perPage, pageNumber);
 		}
+		if(obj.sightCount === 0) {
+			req.flash('error', "No matching documents found");
+			return res.redirect('/sights');
+		}
     	else if (obj.error) {
             req.flash('error', 'Sorry, Something went wrong');
             return res.redirect('/sights');
