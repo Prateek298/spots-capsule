@@ -19,6 +19,7 @@ require("./configs/passPort")(passport);
 app.set("view engine", 'ejs');
 app.use(express.static(__dirname + '/public'));
 
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(require('method-override')("_method"));
 app.use(flash());

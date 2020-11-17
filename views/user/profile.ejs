@@ -62,7 +62,7 @@
 			<img src="<%= user.profilePic.url %>" alt="...">
 			<h2><%= user.username %></h2>
 			<p><%= user.email %></p>
-			<% if(user._id.equals(currentUser._id)) { %>
+			<% if(currentUser && user._id.equals(currentUser._id)) { %>
 				<div>
 					<a href="/users/<%= user._id %>/edit"><button type="button" class="btn btn-warning btn-sm mr-1">Edit</button></a>
 				</div>
@@ -75,7 +75,7 @@
 			<div>
 				<p><%= user.about %></p>
 			</div>
-			<% if(user._id.equals(currentUser._id)) { %>
+			<% if(currentUser && user._id.equals(currentUser._id)) { %>
 				<div>
 					<form action="/users/<%= user._id %>?_method=DELETE" method="POST">
 						<button class="btn btn-sm btn-outline-danger">Remove your account</button>

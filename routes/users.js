@@ -50,12 +50,12 @@ router.post("/", upload.single('image'), (req, res) => {
 
 //SHOW
 router.get("/:id", (req, res) => {
-	User.findById(req.params.id, (err, foundUser) => {
-		if(err) {
+	User.findById(req.params.id, (err, user) => {
+		if(err || !user) {
 			req.flash('error', "User not found");
 			return res.redirect("back");
 		}
-		res.render("user/profile", { user: foundUser });
+		res.render("user/profile", { user });
 	});
 });
 
@@ -72,7 +72,7 @@ router.get("/:id/edit", middleware.checkUser, (req, res) => {
 
 //UPDATE
 router.put("/:id", middleware.checkUser, upload.single('image'), (req, res) => {
-	User.findByIdAndUpdate(req.params.id, req.body.user, async (err, user) => {
+	User.findByIdAndUpdate(req.params.id, req.body.user, { new: true }, async (err, user) => {
 		if(err) {
 			req.flash('error', "User not found");
 			return res.redirect("/users/" + req.params.id);
@@ -85,8 +85,9 @@ router.put("/:id", middleware.checkUser, upload.single('image'), (req, res) => {
 			user.profilePic.filename = req.file.filename;
 			await user.save();
 		}
-		req.flash('success', "Profile updated");
-		res.redirect("/users/" + req.params.id);
+		console.log("Updated user: ", user);
+		// res.render('user/profile', { user });
+		res.redirect("/users/" + req.params.id); //-- weird issue: _id undefined 
 	});
 });
 

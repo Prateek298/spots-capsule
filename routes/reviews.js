@@ -39,7 +39,7 @@ router.post("/", middleware.checkLogin, middleware.checkReviewExistence, (req, r
 			req.flash('error', "Sight couldn't be found");
 			return res.redirect("back");
 		}
-		Review.create(req.body.review, (err, review) => {
+		Review.create(req.body.review, async (err, review) => {
 			if(err) {
 				console.log(err);
 				return res.redirect("back");
@@ -52,7 +52,7 @@ router.post("/", middleware.checkLogin, middleware.checkReviewExistence, (req, r
 			//Updating the sight
 			sight.reviews.push(review);
 			sight.rating = calculateAverage(sight.reviews);
-			sight.save();
+			await sight.save();
 			
 			req.flash('success', "Review added");
 			res.redirect("/sights/" + req.params.id);
@@ -119,13 +119,7 @@ router.delete("/:rev_id", middleware.checkLogin, middleware.checkReviewOwnership
     });
 });
 
-function calculateAverage(reviews) {
-    if (reviews.length === 0) {
-        return 0;
-    }
-    let sum = 0;
-    reviews.forEach((element) => { sum += element.rating });
-    return sum / reviews.length;
-}
+const calculateAverage = reviews => 
+(reviews.length === 0)? 0 : reviews.reduce((accumulator, review) => accumulator + review.rating , 0)/reviews.length;
 
 module.exports = router;

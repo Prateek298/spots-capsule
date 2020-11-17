@@ -17,6 +17,17 @@ router.get("/about", (req, res) => {
 	res.render('about');
 });
 
+//Download app
+router.get("/download", (req, res) => {
+	res.download("./public/androidApp.apk", "SpotsCapsule.apk", (err) => {
+		if(err) {
+			console.log(err);
+			req.flash('error', "Something went wrong");
+			return res.redirect('/sights');
+		}
+	});
+});
+
 //====================Forgot Password================================
 router.get("/forgot", (req, res) => {
 	res.render("user/forgotPass");

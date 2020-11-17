@@ -12,7 +12,6 @@ const userSchema = new mongoose.Schema({
 		url: String,
     	filename: String
 	},
-	profilePicId: String,
 	about: String,
 	isAdmin: {type: Boolean, default: false},
 	isPermAdmin: {type: Boolean, default: false},
