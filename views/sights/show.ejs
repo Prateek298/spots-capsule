@@ -87,7 +87,7 @@
 					</span>
                     <h4>Latest reviews for this sight:</h4>
                     <hr style="margin-top: 0;">
-                    <% sight.reviews.slice(0, 5).forEach(function(review){ %>
+                    <% sight.reviews.slice(0, 5).forEach(review => { %>
                     <div class="row">
                         <div class="col-md-3 col-3">
                             <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
@@ -120,8 +120,9 @@
                     </div>
                     <% } %>
                     <div>
-                        <a class="btn btn-primary btn-lg <% if (currentUser && sight.reviews.some((review) => review.user.id.equals(currentUser._id))) { %> disabled <% } %>" href="/sights/<%= sight._id %>/reviews/new">
-                            Write a New Review</a>
+                        <a class="btn btn-primary btn-lg <% if (currentUser && sight.reviews.some( review => review.user.id.equals(currentUser._id))) { %> disabled <% } %>" href="/sights/<%= sight._id %>/reviews/new">
+                            Write a New Review
+						</a>
                     </div>
                 </section>
 		

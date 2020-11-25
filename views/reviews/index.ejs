@@ -33,11 +33,14 @@
 					</span>
                     <h4>All reviews for this sight:</h4>
                     <hr style="margin-top: 0;">
-                    <% sight.reviews.forEach((review) => { %>
+                    <% sight.reviews.forEach( review => { %>
                     <div class="row">
                         <div class="col-md-3">
                             <%- '<span class="fa fa-star checked"></span>'.repeat(review.rating) %>
-                            <div>Review by: <strong><%= review.user.username %></strong></div>
+                            <div>
+								Review by: 
+								<strong><a href="/users/<%= review.user.id %>"><%= review.user.username %></a></strong>
+							</div>
                             <span><em><%= moment(review.updatedAt).fromNow() %></em></span> 
                         </div>
                         <div class="col-md-7">
@@ -48,7 +51,7 @@
 						<div class="col-md-2">
 							<% if(currentUser && review.user.id.equals(currentUser._id)){ %>
                             	<a class="btn btn-sm btn-warning mb-2"
-                               		href="/sights/<%=sight._id %>/reviews/<%=review._id %>/edit">Edit</a>
+                               		href="/sights/<%= sight._id %>/reviews/<%= review._id %>/edit">Edit</a>
 							<% } %>
 							<% if(currentUser && (review.user.id.equals(currentUser._id) || currentUser.isPermAdmin )){ %>
                             	<form id="delete-form" action="/sights/<%= sight._id %>/reviews/<%=review._id %>?_method=DELETE" method="POST">
@@ -61,7 +64,7 @@
                     <% }); %>
                     <% } %>
                     <div>
-                        <a class="btn btn-primary <% if (currentUser && sight.reviews.some(function (review) {return review.user.id.equals(currentUser._id)})) { %> disabled <% } %>" href="/sights/<%= sight._id %>/reviews/new">
+                        <a class="btn btn-primary <% if (currentUser && sight.reviews.some( review => review.user.id.equals(currentUser._id))) { %> disabled <% } %>" href="/sights/<%= sight._id %>/reviews/new">
                             Write a New Review</a>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ const express        = require('express'),
 	  { storage }    = require('../configs/cloudinary'),
 	  upload         = multer({ storage }),
 	  { cloudinary } = require('../configs/cloudinary'),
+	  Bowser         = require('bowser'),
 	  mbxGeocoding   = require('@mapbox/mapbox-sdk/services/geocoding');
 
 const geocoder = mbxGeocoding({ accessToken: process.env.MAPBOX_TOKEN });
