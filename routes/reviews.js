@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 			req.flash('error', "Sight couldn't be found");
 			return res.redirect("back");
 		}
-		res.render("reviews/index", {sight});
+		res.render("reviews/index", { sight, sortCategory: req.query.sortBy });
 	});
 });
 

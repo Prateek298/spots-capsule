@@ -87,12 +87,12 @@ router.get("/:id", (req, res) => {
 	Sight.findById(req.params.id).populate({
 		path: 'reviews',
 		options: {sort: sortCategory}   
-	}).exec((err, foundSight) => {
+	}).exec((err, sight) => {
 		if(err) {
 			req.flash('error', "Sight couldn't be found");
 			return res.redirect('back');
 		}
-		res.render("sights/show", {sight: foundSight});
+		res.render("sights/show", { sight, sortCategory: req.query.sortBy });
 	});
 });
 

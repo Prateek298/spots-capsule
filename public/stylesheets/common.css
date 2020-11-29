@@ -4,6 +4,10 @@ body{
 	margin-top: 90px;
 }
 
+.fa-star {
+	color: #f7a70f;
+}
+
 nav {
 	/* background-color: #e1f5f7; */
 	background-color: #5c6bc0;

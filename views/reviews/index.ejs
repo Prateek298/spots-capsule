@@ -24,10 +24,9 @@
 					<span style="float: right">
 						<form action="/sights/<%= sight._id %>/reviews" method="GET">
 							<label for="sortBy">Sort By:</label>
-							<select name="sortBy" id="sortBy" onchange='if(this.value != 0) { this.form.submit() }'>
-								<option value="0">Sort</option>
-								<option value="ratings">Ratings</option>
-								<option value="createdAt">Date</option>
+							<select name="sortBy" id="sortBy" onchange='this.form.submit()'>
+								<option value="date" <%= (sortCategory === 'date')? 'selected': '' %> >Date</option>
+								<option value="ratings" <%= (sortCategory === 'ratings')? 'selected': '' %> >Ratings</option>
 							</select>
 						</form>
 					</span>

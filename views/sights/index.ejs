@@ -4,7 +4,6 @@
 	
 	<header class="jumbotron">
 		<h1>Divine India</h1>
-		<!-- <p>Bask in the Glory...</p> -->
 		<% if(currentUser && currentUser.isAdmin) { %>
 			<a href="/sights/new" class="btn btn-primary">Add New Sight</a>
 		<% } %>
@@ -12,11 +11,13 @@
 	
 	<div class="row">
 			
-		<% sights.forEach((sight) => { %>
+		<% for(sight of sights) { %>
 		
 			<main class="col-12 col-md-4">
 				<div class="card mb-2">
-         			<img src="<%= sight.showPic %>" class="card-img-top" style="max-height: 17em" alt="...">
+         			<a href="/sights/<%= sight._id %>">
+						<img src="<%= sight.showPic %>" class="card-img-top" style="max-height: 17em" alt="...">
+					</a>	
          			<div class="card-body">
 						<h4 class="card-title">
 							<a href="/sights/<%= sight._id %>"><strong><%= sight.placeName %></strong></a>
@@ -32,7 +33,7 @@
         		</div>
 			</main>
 		
-    	<% }); %>
+    	<% } %>
 		
 	</div>
 		
