@@ -8,7 +8,6 @@ const express = require('express'),
 	helmet = require('helmet');
 
 const connectDB = require('./configs/db');
-const User = require('./models/user');
 
 //Basic configs
 if (process.env.NODE_ENV !== 'production') {
@@ -50,7 +49,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Allows server side values to be used in templates
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
 	res.locals.currentUser = req.user;
 	res.locals.success = req.flash('success');
 	res.locals.error = req.flash('error');
